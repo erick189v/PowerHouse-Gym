@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Journey Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ journey.name }}</span>
+    <p>workout type: {{ journey.workout_type }}</p>
+    <p>Description: {{ journey.description|linebreaks }}</p>
+    {% if journey.age > 0 %}
+      <p>Age: {{ journey.age }}</p>
+    {% else %}
+      <p>Age: 24</p>
+    {% endif %}
+  </div>
+  <div class="card-action">
+    <a href="{% url 'journeys_update' journey.id %}">Edit</a>
+    <a href="{% url 'journeys_delete' journey.id %}">Delete</a>
+  </div>
+</div>
+
+<div class="col s6">
+  <table class="striped">
+    <thead>
+      <tr><th>Rep</th><th>Set</th></tr>
+    </thead>
+    <tbody>
+      {% for rep in journey.repset_set.all %}
+        <tr>
+          <td>{{repset.rep}}</td>
+          <td>{{repset.get_workouts_display}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<!-- New Markup Above -->
+</div>
+
+{% endblock %}

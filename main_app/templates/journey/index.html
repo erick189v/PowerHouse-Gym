@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% for journey in journeys %}
 <div class="card">
     <!-- Add this <a> tag -->
-    <a href="/journey/{{ journey.id }}">
+
+    <a href="{% url 'detail' journey.id%}">
       <div class="card-content">
         <span class="card-title">{{ journey.name }}</span>
         <p>workout type: {{ journey.workout_type }}</p>
@@ -17,5 +18,5 @@
     <!-- Don't forget the </a> closing tag -->
     </a>
   </div>
-
+{% endfor %}
 {% endblock %}

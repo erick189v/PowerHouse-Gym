@@ -16,8 +16,20 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;PowerHouse</a></li>
         </ul>
         <ul class="right">
-          <li><a href="/about">About</a></li>
-          <li><a href="/journey">View My Journey</a></li>
+          <li><a href="{% url 'about'%}">About</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{%url 'journeys_create' %}">Add more</a></li>
+            <li><a href="{% url 'index'%}">View My Journey</a></li>
+
+            <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <input type="submit" class="btn" value="logout">
+            </form>
+
+          {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
