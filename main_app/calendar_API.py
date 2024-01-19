@@ -1,4 +1,4 @@
-# from decouple import config
+from decouple import config
 from google.oauth2 import service_account
 import googleapiclient.discovery
 import datetime
@@ -16,9 +16,9 @@ def test_calendar():
 
     # CREATE A NEW EVENT
     new_event = {
-    'summary': "Ben Hammond Tech's Super Awesome Event",
-    'location': 'Denver, CO USA',
-    'description': 'https://benhammond.tech',
+    'summary': "MindBody",
+    'location': 'PowerHouse Gym',
+    'description': 'https://pgmia.com/',
     'start': {
         'date': f"{datetime.date.today()}",
         'timeZone': 'America/New_York',
