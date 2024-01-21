@@ -26,3 +26,4 @@ uritemplate==4.1.1
 urllib3==2.1.0
 django-widget-tweaks==1.4.8
 
+django-on-heroku
