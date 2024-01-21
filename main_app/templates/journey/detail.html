@@ -1,41 +1,42 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Journey Details</h1>
-
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ journey.name }}</span>
-    <p>workout type: {{ journey.workout_type }}</p>
-    <p>Description: {{ journey.description|linebreaks }}</p>
-    {% if journey.age > 0 %}
-      <p>Age: {{ journey.age }}</p>
-    {% else %}
-      <p>Age: 24</p>
-    {% endif %}
+<div class="container mx-auto p-6">
+  <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="md:flex">
+      <div class="p-8">
+        <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ journey.workout_type }}</div>
+        
+        <a href="{% url 'journeys_detail' journey.id %}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ journey.name }}</a>
+        <p class="mt-2 text-gray-500">{{ journey.description|linebreaks }}</p>
+        <p class="mt-2">Age: {{ journey.age|default:"24" }}</p>
+      </div>
+      <div class="flex items-center justify-between p-4 border-t border-gray-200">
+        <a href="{% url 'journeys_update' journey.id %}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+        <a href="{% url 'journeys_delete' journey.id %}" class="text-red-600 hover:text-red-900">Delete</a>
+      </div>
+    </div>
   </div>
-  <div class="card-action">
-    <a href="{% url 'journeys_update' journey.id %}">Edit</a>
-    <a href="{% url 'journeys_delete' journey.id %}">Delete</a>
-  </div>
-</div>
 
-<div class="col s6">
-  <table class="striped">
-    <thead>
-      <tr><th>Rep</th><th>Set</th></tr>
-    </thead>
-    <tbody>
-      {% for rep in journey.repset_set.all %}
-        <tr>
-          <td>{{repset.rep}}</td>
-          <td>{{repset.get_workouts_display}}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-<!-- New Markup Above -->
+  <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mt-5">
+    <div class="md:flex">
+      <div class="p-8">
+        <table class="table-auto w-full">
+          <thead>
+            <tr><th class="px-4 py-2">Rep</th><th class="px-4 py-2">Set</th></tr>
+          </thead>
+          <tbody>
+            {% for repset in journey.repset_set.all %}
+              <tr class="bg-gray-100">
+                <td class="border px-4 py-2">{{ repset.rep }}</td>
+                <td class="border px-4 py-2">{{ repset.get_workouts_display }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

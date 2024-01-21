@@ -1,14 +1,8 @@
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-  
-  main {
-    flex: 1 0 auto;
-  }
-  
-  footer.page-footer {
-    padding-top: 0;
-    text-align: right;
-  }
+
+input[type=text],
+input[type=date],
+input[type=time],
+select,
+textarea {
+    color: #000; /* This sets the text color to black */
+}

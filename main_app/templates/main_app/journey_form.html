@@ -1,19 +1,62 @@
+<!-- journeys/create form. where the user adds their workout -->
+
 {% extends 'base.html' %}
 
 {% block content %}
-{% if object %}
-  <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
-{% else %}
-{% endif %}
-  <h1>Add info</h1>
-  <!-- Leaving the action empty makes the form post to the same url used to display it -->
-  <form action="" method="POST">
-    <!-- Django requires the following for security purposes -->
+<div class="container">
+  {% if object %}
+    <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
+  {% else %}
+    <h1>Add Exercise</h1>
+  {% endif %}
+
+  <form action="" method="POST" class="exercise-form">
     {% csrf_token %}
-    <table>
-      <!-- Render the inputs inside of <tr>s & <td>s -->
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
+    <div class="form-group">
+      {% for field in form %}
+        <div class="row">
+          <div class="input-field col s12">
+            <div class="text-white">
+              {{ field.label_tag }}
+            </div>
+            <div class="text-black">
+              {{ field }}
+            </div>
+            {% if field.help_text %}
+              <span class="helper-text">{{ field.help_text }}</span>
+            {% endif %}
+            {% for error in field.errors %}
+              <div class="red-text">{{ error }}</div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button type="submit" class="group relative flex justify-center py-3 px-4 border border-transparent text-lg leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      Submit
+    </button>
   </form>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .exercise-form .row {
+    margin-bottom: 20px;
+  }
+  .exercise-form .input-field label input[type=text]{
+    color: black;
+  }
+  .exercise-form .input-field input[type=text]:focus + label,
+  .exercise-form .input-field input[type=number]:focus + label,
+  .exercise-form .input-field textarea:focus + label {
+    color: #26a69a;
+  }
+  .exercise-form .input-field input[type=text]:focus,
+  .exercise-form .input-field input[type=number]:focus,
+  .exercise-form .input-field textarea:focus {
+    border-bottom: 2px solid #26a69a;
+    box-shadow: none;
+  }
+</style>
 {% endblock %}
