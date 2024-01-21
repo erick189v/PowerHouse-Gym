@@ -58,6 +58,6 @@ def __str__(self):
     return f'{self.name} ({self.id})'
 
 def get_absolute_url(self):
-    return reverse('detail', kwargs={'cat_id':self.id})
+    return reverse('detail', kwargs={'journey_id':self.id})
 
 

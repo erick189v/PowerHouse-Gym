@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from django.urls import reverse
+# from django.urls import reverse
 
 from .models import Journey
 
@@ -79,16 +79,10 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-@login_required
-def cats_index(request):
-   ...
 
 
 
 @login_required
 def add_repset(request, journey_id):
-    ...
-   
-class CatCreate(LoginRequiredMixin, CreateView):
     ...
 

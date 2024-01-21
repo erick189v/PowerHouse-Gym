@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('journeys/<int:pk>/update/', views.JourneyUpdate.as_view(), name='journeys_update'),
     path('journeys/<int:pk>/delete/', views.JourneyDelete.as_view(), name='journeys_delete'),
     path('accounts/signup/', views.signup, name='signup'),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]

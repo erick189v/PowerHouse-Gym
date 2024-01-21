@@ -1,4 +1,5 @@
-{% load static %}
+{% load static tailwind_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,39 +8,55 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>PowerHouseGym</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  {% tailwind_css %}
 </head>
-<body>
-  <header class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;PowerHouse</a></li>
-        </ul>
-        <ul class="right">
-          <li><a href="{% url 'about'%}">About</a></li>
+<body class="bg-black text-white">
+  <header class="sticky top-0 z-50">
+    <nav class="bg-gray-800 shadow-lg">
+      <div class="container mx-auto px-6 py-3 md:flex md:justify-between md:items-center">
+        <div class="flex justify-between items-center">
+          <div>
+            <a href="/" class="text-xl font-semibold text-white">
+              <img src="{% static 'css/powerhouse/PHG_FITCEN_LOGO_White-1-min.png' %}" alt="PowerHouse Fitness Gym Center" class="h-8">
+            </a>
+          </div>
+          <!-- Mobile menu button -->
+          <div class="flex md:hidden">
+            <button type="button" class="text-gray-200 hover:text-gray-400 focus:outline-none focus:text-gray-400" aria-label="toggle menu">
+              <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
+                <path fill-rule="evenodd" d="M4 5h16v2H4V5zm0 7h16v2H4v-2zm0 7h16v2H4v-2z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+        <div class="items-center md:flex">
+          <div class="flex flex-col mt-2 md:flex-row md:mt-0 md:mx-1">
+            <a href="{% url 'about'%}" class="my-1 text-sm font-medium text-gray-200 hover:text-indigo-400 md:mx-4 md:my-0">About</a>
+            {% if user.is_authenticated %}
+            <a href="{%url 'journeys_create' %}" class="my-1 text-sm font-medium text-gray-200 hover:text-indigo-400 md:mx-4 md:my-0">Add more</a>
+            <a href="{% url 'index'%}" class="my-1 text-sm font-medium text-gray-200 hover:text-indigo-400 md:mx-4 md:my-0">View My Journey</a>
+            {% else %}
+            <a href="{% url 'signup' %}" class="my-1 text-sm font-medium text-gray-200 hover:text-indigo-400 md:mx-4 md:my-0">Sign Up</a>
+            <a href="{% url 'login' %}" class="my-1 text-sm font-medium text-gray-200 hover:text-indigo-400 md:mx-4 md:my-0">Log In</a>
+            {% endif %}
+          </div>
           {% if user.is_authenticated %}
-            <li><a href="{%url 'journeys_create' %}">Add more</a></li>
-            <li><a href="{% url 'index'%}">View My Journey</a></li>
-
-            <form method="POST" action="{% url 'logout' %}">
+          <form method="POST" action="{% url 'logout' %}" class="flex items-center py-2 -mx-1 md:mx-0">
             {% csrf_token %}
-            <input type="submit" class="btn" value="logout">
-            </form>
-
-          {% else %}
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'login' %}">Log In</a></li>
+            <button class="text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:bg-red-600 font-medium rounded-lg text-sm px-4 py-2">Logout</button>
+          </form>
           {% endif %}
-        </ul>
+        </div>
       </div>
     </nav>
   </header>
-  <main class="container">
+  <main class="container mx-auto px-6 py-8">
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="page-footer">
-    <div class="right">All Rights Reserved, &copy; 2021 PowerhouseMia &nbsp;</div>
+  <footer class="py-6 bg-gray-800 text-center text-sm text-gray-400">
+    <div>All Rights Reserved, &copy; 2021 PowerhouseMia</div>
   </footer>
 </body>
 </html>
