@@ -13,7 +13,7 @@
     </div>
     <form class="mt-8 space-y-6" method="POST" action="{% url 'signup' %}">
       {% csrf_token %}
-      <div class="-space-y-px rounded-md shadow-sm">
+      <div class="-space-y-px rounded-md shadow-sm text-white">
         {{ form.as_p }}
       </div>
       {% if error_message %}

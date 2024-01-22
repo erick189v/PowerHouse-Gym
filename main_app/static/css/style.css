@@ -1,8 +1,0 @@
-
-input[type=text],
-input[type=date],
-input[type=time],
-select,
-textarea {
-    color: #000; /* This sets the text color to black */
-}

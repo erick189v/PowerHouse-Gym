@@ -7,7 +7,7 @@
       <div class="p-8">
         <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ journey.workout_type }}</div>
         
-        <a href="{% url 'journeys_detail' journey.id %}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ journey.name }}</a>
+        <a href="{% url 'detail' journey.id %}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ journey.name }}</a>
         <p class="mt-2 text-gray-500">{{ journey.description|linebreaks }}</p>
         <p class="mt-2">Age: {{ journey.age|default:"24" }}</p>
       </div>
